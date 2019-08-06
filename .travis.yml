@@ -13,5 +13,5 @@ env:
 - PACKAGE=apache-arrow
 script:
 - brew audit $PACKAGE
-- brew install -v --build-from-source $PACKAGE
+- brew install -v --build-from-source ./${PACKAGE}.rb
 - brew test $PACKAGE
