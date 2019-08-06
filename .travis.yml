@@ -1,4 +1,5 @@
 # Inspired by https://github.com/gemnasium/homebrew-gemnasium/blob/master/.travis.yml
+os: osx
 language: ruby
 cache: bundler
 
