@@ -1,5 +1,7 @@
 # Inspired by https://github.com/gemnasium/homebrew-gemnasium/blob/master/.travis.yml
-language: objective-c
+language: ruby
+cache: bundler
+
 before_install:
 - brew update
 install:
@@ -10,5 +12,5 @@ env:
 - PACKAGE=apache-arrow
 script:
 - brew audit $PACKAGE
-- brew install -v $PACKAGE
+- brew install -v --build-from-source $PACKAGE
 - brew test $PACKAGE
