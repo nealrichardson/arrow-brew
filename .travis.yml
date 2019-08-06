@@ -8,5 +8,6 @@ env:
 - PACKAGE=apache-arrow
 script:
 - brew audit $PACKAGE
-- brew install -v --build-from-source ./${PACKAGE}.rb
+- brew install -v --build-from-source --build-bottle ./${PACKAGE}.rb
 - brew test $PACKAGE
+- brew bottle ./${PACKAGE}.rb
