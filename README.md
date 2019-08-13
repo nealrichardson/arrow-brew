@@ -1,2 +1,2 @@
 # arrow-brew
-Build Apache Arrow Homebrew formula on Travis
+Build Apache Arrow Homebrew formulae on Travis

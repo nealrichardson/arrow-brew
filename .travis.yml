@@ -4,7 +4,7 @@ cache: bundler
 
 before_install:
 - brew update
+- brew audit ./homebrew/apache-arrow.rb
 script:
-- brew audit ./apache-arrow.rb
-- brew install -v --build-from-source --HEAD ./apache-arrow.rb
-- brew test ./apache-arrow.rb
+- brew install -v --build-from-source --HEAD ./homebrew/apache-arrow.rb
+- brew test ./homebrew/apache-arrow.rb
