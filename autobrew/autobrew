@@ -18,7 +18,9 @@ curl -fsSL https://github.com/$UPSTREAM_ORG/brew/tarball/master | tar xz --strip
 # Install bottle + dependencies
 $BREW deps -n $PKG_BREW_NAME 2>/dev/null
 BREW_DEPS=$($BREW deps -n $PKG_BREW_NAME 2>/dev/null)
-HOMEBREW_CACHE="$AUTOBREW" $BREW install --force-bottle $BREW_DEPS $PKG_BREW_NAME 2>&1 | perl -pe 's/Warning/Note/gi'
+HOMEBREW_CACHE="$AUTOBREW" $BREW install --force-bottle $BREW_DEPS 2>&1 | perl -pe 's/Warning/Note/gi'
+HOMEBREW_CACHE="$AUTOBREW" $BREW install --build-from-source --head "./${PKG_BREW_NAME}.rb" 2>&1 | perl -pe 's/Warning/Note/gi'
+
 
 # Hardcode this for my custom autobrew build
 rm -f $BREWDIR/lib/*.dylib
@@ -36,4 +38,5 @@ done
 unset HOMEBREW_NO_ANALYTICS
 unset HOMEBREW_NO_AUTO_UPDATE
 
-rm -f tests/testthat.R
+# Hack to work around segfault on CRAN server
+# rm -f tests/testthat.R

@@ -1,10 +1,25 @@
 os: osx
-language: ruby
-cache: bundler
 
-before_install:
-- brew update
-- brew audit ./homebrew/apache-arrow.rb
-script:
-- brew install -v --build-from-source --HEAD ./homebrew/apache-arrow.rb
-- brew test ./homebrew/apache-arrow.rb
+matrix:
+  include:
+  - name: "Homebrew formula"
+    language: ruby
+    cache: bundler
+    before_install:
+    - brew update
+    - brew audit ./homebrew/apache-arrow.rb
+    script:
+      - brew install -v --build-from-source --HEAD ./homebrew/apache-arrow.rb
+      - brew test ./homebrew/apache-arrow.rb
+  - name: "R Autobrew + macOS binary build"
+    language: r
+    cache: packages
+    env:
+      FORCE_AUTOBREW: "TRUE"
+    before_install:
+    - git clone https://github.com/nealrichardson/arrow -b force-autobrew
+    - cp autobrew/* arrow/r
+    - cd arrow/r
+    script:
+    - R CMD INSTALL --build --install-tests .
+    - R -e 'tools::testInstalledPackage("arrow", types="tests")'
