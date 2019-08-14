@@ -10,7 +10,7 @@
     "files": [
       {
         "includePattern": "./arrow/r/(.*.tgz|PACKAGES)",
-        "uploadPattern": "/bin/macosx/el-capitan/contrib/3.6/$1",
+        "uploadPattern": "/bin/macosx/el-capitan/contrib/RVERSION/$1",
         "matrixParams": {"override": 1}
       }
     ],
