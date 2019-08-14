@@ -1,15 +1,15 @@
 os: osx
 matrix:
   include:
-  - name: Homebrew formula
-    language: ruby
-    cache: bundler
-    before_install:
-    - brew update
-    - brew audit ./homebrew/apache-arrow.rb
-    script:
-    - brew install -v --build-from-source --HEAD ./homebrew/apache-arrow.rb
-    - brew test ./homebrew/apache-arrow.rb
+  # - name: Homebrew formula
+  #   language: ruby
+  #   cache: bundler
+  #   before_install:
+  #   - brew update
+  #   - brew audit ./homebrew/apache-arrow.rb
+  #   script:
+  #   - brew install -v --build-from-source --HEAD ./homebrew/apache-arrow.rb
+  #   - brew test ./homebrew/apache-arrow.rb
   - name: R Autobrew + macOS binary build
     language: r
     cache: packages
