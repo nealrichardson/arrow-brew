@@ -23,7 +23,7 @@ matrix:
     - source ../../up-date-description.sh
     script:
     - R CMD INSTALL --build --install-tests .
-    - R -e 'tools::testInstalledPackage("arrow", types="tests"); tools::write_PACKAGES(".")'
+    - R -e 'tools::testInstalledPackage("arrow", types="tests"); tools::write_PACKAGES(".", type = "mac.binary")'
     - ls
     - cd ../../
     - source up-date-bintray.sh
