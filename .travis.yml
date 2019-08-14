@@ -11,8 +11,8 @@ matrix:
   #   - brew install -v --build-from-source --HEAD ./homebrew/apache-arrow.rb
   #   - brew test ./homebrew/apache-arrow.rb
   - name: R Autobrew + macOS binary build
-    language: r
-    cache: packages
+    language: ruby
+    # cache: packages
     env:
       FORCE_AUTOBREW: 'TRUE'
     before_install:
@@ -20,7 +20,7 @@ matrix:
     - cp autobrew/* arrow/r
     # TODO: move autobrew files to arrow/r/tools?
     - cd arrow/r
-    - source ../../up-date.sh
+    - source ../../up-date-description.sh
     script:
     # - R CMD INSTALL --build --install-tests .
     # - R -e 'tools::testInstalledPackage("arrow", types="tests"); tools::write_PACKAGES(".")'
