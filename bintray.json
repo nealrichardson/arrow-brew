@@ -1,0 +1,17 @@
+{
+    "package": {
+        "name": "arrow",
+        "repo": "arrow-r",
+        "subject": "nealrichardson"
+    },
+    "version": {
+        "name": "latest"
+    },
+    "files": [
+      {
+        "includePattern": "arrow/r/[.*.tgz|PACKAGES]",
+        "uploadPattern": "/bin/macosx/el-capitan/contrib/3.6"
+      }
+    ],
+    "publish": true
+}
