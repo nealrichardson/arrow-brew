@@ -19,8 +19,12 @@ curl -fsSL https://github.com/$UPSTREAM_ORG/brew/tarball/master | tar xz --strip
 $BREW deps -n $PKG_BREW_NAME 2>/dev/null
 BREW_DEPS=$($BREW deps -n $PKG_BREW_NAME 2>/dev/null)
 HOMEBREW_CACHE="$AUTOBREW" $BREW install --force-bottle $BREW_DEPS 2>&1 | perl -pe 's/Warning/Note/gi'
-HOMEBREW_CACHE="$AUTOBREW" $BREW install --build-from-source --HEAD "./${PKG_BREW_NAME}.rb" 2>&1 | perl -pe 's/Warning/Note/gi'
-
+if [ -f "./${PKG_BREW_NAME}.rb" ]; then
+  # Use the local brew formula and install --HEAD
+  HOMEBREW_CACHE="$AUTOBREW" $BREW install --build-from-source --HEAD "./${PKG_BREW_NAME}.rb" 2>&1 | perl -pe 's/Warning/Note/gi'
+else
+  HOMEBREW_CACHE="$AUTOBREW" $BREW install --force-bottle $PKG_BREW_NAME 2>&1 | perl -pe 's/Warning/Note/gi'
+fi
 
 # Hardcode this for my custom autobrew build
 rm -f $BREWDIR/lib/*.dylib
