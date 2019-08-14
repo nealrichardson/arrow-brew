@@ -22,10 +22,13 @@ matrix:
     - cd arrow/r
     - source ../../up-date.sh
     script:
-    - R CMD INSTALL --build --install-tests .
-    - R -e 'tools::testInstalledPackage("arrow", types="tests"); tools::write_PACKAGES(".")'
+    # - R CMD INSTALL --build --install-tests .
+    # - R -e 'tools::testInstalledPackage("arrow", types="tests"); tools::write_PACKAGES(".")'
+    - mv DESCRIPTION PACKAGES
+    - mv README.md arrow_foo.tgz
     - ls
     - cd ../../
+    - source up-date-bintray.sh
     # TODO: determine R x.y version and sed in bintray.json
     deploy:
       provider: bintray
