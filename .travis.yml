@@ -1,37 +1,10 @@
 os: osx
-matrix:
-  include:
-  # - name: Homebrew formula
-  #   language: ruby
-  #   cache: bundler
-  #   before_install:
-  #   - brew update
-  #   - brew audit ./homebrew/apache-arrow.rb
-  #   script:
-  #   - brew install -v --build-from-source --HEAD ./homebrew/apache-arrow.rb
-  #   - brew test ./homebrew/apache-arrow.rb
-  - name: R Autobrew + macOS binary build
-    language: r
-    cache: packages
-    env:
-      FORCE_AUTOBREW: 'TRUE'
-    before_install:
-    - git clone https://github.com/nealrichardson/arrow -b force-autobrew
-    - cp autobrew/* arrow/r
-    # TODO: move autobrew files to arrow/r/tools?
-    - cd arrow/r
-    - source ../../up-date-description.sh
-    script:
-    - R CMD INSTALL --build --install-tests .
-    - R -e 'tools::testInstalledPackage("arrow", types="tests"); tools::write_PACKAGES(".", type = "mac.binary")'
-    - ls
-    - cd ../../
-    - source up-date-bintray.sh
-    # TODO: determine R x.y version and sed in bintray.json
-    deploy:
-      provider: bintray
-      file: bintray.json
-      user: nealrichardson
-      key:
-        secure: wRM1nxw20DWZDKTzEsS+qA1r18RhJ2BE7ATKL7jzXz8XlxwOjLVPokyZyS1hkisN47l0A8+qjVNKR2loTnEc8UuUSkvrJk6bxJ37as7J5HPGlm4/RAgbnDCnPVBBC4w16Jv+T16H0NUgGPZkDwEL6w2I6P5pWmK/QGHD85CSGxSQcS8WUS2s/VQvKEC60UgBEK4FVgmwBK9n4aaYMSoUPs5sCYR9hIJqrg4qVDP5E6g5y/fzn3T0fTcXQa37nikxFj+HSezD5rOujUstnesziqeaBCW3/aze7GE1+gPU572u3xGltaMapFROGuB5ucBQkm5PNrIzRPV1o68KIb9m0usqUmLYRfnptyM5wbApJDflHSL3IDef8DdvdXIbxklqYmyOrPvrBfvUi+4O4Ml4rP7NQbj6uNSw58sVdI2ohveUV+kA+0FO31b7i8CkzA8Tfy8AHNUmaGthdRWRFMWz/4cn+h4iM9fYgBkLGBtUHuMwNzcEElqON6yVfcmzna1DqSoJDvTPJx27WShh3a2acY0EJTl1jvFU/1AUn4VFz/AC8ZXuSM3ZDLqCxRKcY0btMsreNLrwc1A1zVdugHgrbsJQJYLjfqcRhFm+1MQMPN72BHd7hXdcIK8JiGKNP69V6s4DZrCxqr4M1XceBIbLHd6qkVvRnfez6vHsUFbTJpE=
-      skip_cleanup: true
+language: ruby
+cache: bundler
+
+before_install:
+- brew update
+- brew audit ./homebrew/apache-arrow.rb
+script:
+- brew install -v --build-from-source --HEAD ./homebrew/apache-arrow.rb
+- brew test ./homebrew/apache-arrow.rb
